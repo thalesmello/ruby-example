@@ -72,10 +72,8 @@ runtime.times do
   if word.include?(user_guess)
     puts "YOU GUESSED A CORRECT LETTER!"
     #replace the underscore with its correct letter value
-    if word.include?(user_guess)
-      location = word.index(user_guess)
-      under_word[location] = user_guess
-    end
+    location = word.index(user_guess)
+    under_word[location] = user_guess
     #when all letters are guess, player wins!
     if word.all? { |e| all_guesses.include?(e) }
       puts "You win!"
