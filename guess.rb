@@ -21,14 +21,13 @@ bouquet = '
 print flower * chances
 print bouquet
 
-
-words = [ "CAT",
-          "DOG",
-          "CHINCHILLA",
-          "FERRET",
-          "HAMSTER",
-          "IGUANA",
-          "SNAKE" ]
+words = %w( CAT
+            DOG
+            CHINCHILLA
+            FERRET
+            HAMSTER
+            IGUANA
+            SNAKE )
 # Shuffle words in array and pick first element
 word = words.sample.split("")
 #use the length of that word to create the right number of underscore spots
