@@ -30,61 +30,61 @@ words = %w( CAT
             SNAKE )
 # Shuffle words in array and pick first element
 word = words.sample.split('')
-#use the length of that word to create the right number of underscore spots
+# Use the length of that word to create the right number of underscore spots
 under_word = ['_'] * word.length
 
-#run the program
+# Run the program
 runtime = word.length + chances
 all_guesses = []
 runtime.times do
-  #will run until no more chances, then program exits
+  # Will run until no more chances, then program exits
   if chances == 0
     exit
   end
 
-  #start with underscore 'word', will update with actual letters guessed as it loops
+  # Start with underscore 'word', will update with actual letters guessed as it loops
   puts "Here is your word: #{under_word}"
   puts 'Enter one letter: '
 
-  #check for letter
+  # Check for letter
   while true
     user_guess = gets.chomp.upcase.to_s
     break if /[A-Z]/.match(user_guess)
     puts 'Invalid. Please enter a new letter: '
   end
-  #make sure it has not been guessed yet
-  #also if more than one letter is entered, only take the first
+  # Make sure it has not been guessed yet
+  # Also if more than one letter is entered, only take the first
   while all_guesses.include?(user_guess[0])
     puts "That's been guessed already. Please enter a new letter.\n\n"
     user_guess = gets.chomp.upcase
   end
 
-  #output the letter picked
+  # Output the letter picked
   puts "You chose: #{user_guess[0]}"
-  #put that letter into array of all letters guessed
+  # Put that letter into array of all letters guessed
   all_guesses << user_guess[0]
-  #output all letters picked so far
+  # Output all letters picked so far
   puts "\n\nHere are your letters so far : #{all_guesses}\n\n"
 
-  #when a correct letter is picked
+  # When a correct letter is picked
   if word.include?(user_guess)
     puts 'YOU GUESSED A CORRECT LETTER!'
-    #replace the underscore with its correct letter value
+    # Replace the underscore with its correct letter value
     location = word.index(user_guess)
     under_word[location] = user_guess
-    #when all letters are guess, player wins!
+    # When all letters are guess, player wins!
     if word.all? { |e| all_guesses.include?(e) }
       puts 'You win!'
       puts "The word is: #{word}"
       exit
     end
   else
-    #if letter is incorrect, remove a petal
+    # If letter is incorrect, remove a petal
     chances -= 1
     puts "THAT IS INCORRECT. You lose a petal!\n\n"
     print flower * chances
     print bouquet
-    #when there are no more chances left, player loses and program ends
+    # When there are no more chances left, player loses and program ends
     if chances == 0
       puts "\n\nYOU RAN OUT OF PETALS. YOU LOSE THE GAME\n\n\n"
       puts "The word was: #{word}"
