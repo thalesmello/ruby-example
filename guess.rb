@@ -11,7 +11,9 @@ def main
 
   # Run the program
   all_guesses = []
-  while chances > 0
+
+  game_finished = false
+  while chances > 0 && !game_finished
     # Start with underscore 'word', will update with actual letters guessed
     # as it loops
     puts "Here is your word: #{under_word}"
@@ -35,7 +37,7 @@ def main
       if win_game?(word, all_guesses)
         puts 'You win!'
         puts "The word is: #{word}"
-        exit
+        game_finished = true
       end
     else
       # If letter is incorrect, remove a petal
