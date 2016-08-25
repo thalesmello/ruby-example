@@ -88,7 +88,7 @@ def get_user_guess(all_guesses)
   # Check for letter
   loop do
     user_guess = gets.chomp.upcase.to_s
-    break if /[A-Z]/ =~ user_guess
+    break if user_guess =~ /[A-Z]/
     puts 'Invalid. Please enter a new letter: '
   end
   # Make sure it has not been guessed yet
