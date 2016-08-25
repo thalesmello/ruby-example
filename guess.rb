@@ -35,7 +35,7 @@ def main
       fill_under_word(under_word, word, user_guess)
 
       # When all letters are guess, player wins!
-      if word.all? { |e| all_guesses.include?(e) }
+      if win_game?(word, all_guesses)
         puts 'You win!'
         puts "The word is: #{word}"
         exit
@@ -124,6 +124,10 @@ def fill_under_word(under_word, word, user_guess)
   word.each_with_index do |letter, i|
     under_word[i] = letter if letter == user_guess
   end
+end
+
+def win_game?(word, all_guesses)
+  word.all? { |letter| all_guesses.include? letter }
 end
 
 main
