@@ -34,11 +34,7 @@ def main
       fill_under_word(under_word, word, user_guess)
 
       # When all letters are guess, player wins!
-      if win_game?(word, all_guesses)
-        puts 'You win!'
-        puts "The word is: #{word}"
-        game_finished = true
-      end
+      game_finished = check_game_finished(word, all_guesses)
     else
       # If letter is incorrect, remove a petal
       chances -= 1
@@ -123,6 +119,15 @@ def fill_under_word(under_word, word, user_guess)
   word.each_with_index do |letter, i|
     under_word[i] = letter if letter == user_guess
   end
+end
+
+def check_game_finished(word, all_guesses)
+  return false unless win_game?(word, all_guesses)
+
+  puts 'You win!'
+  puts "The word is: #{word}"
+
+  true
 end
 
 def win_game?(word, all_guesses)
