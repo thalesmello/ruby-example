@@ -42,7 +42,6 @@ def main
     # Start with underscore 'word', will update with actual letters guessed
     # as it loops
     puts "Here is your word: #{under_word}"
-    puts 'Enter one letter: '
 
     user_guess = get_user_guess(all_guesses)
 
@@ -83,21 +82,32 @@ def main
 end
 
 def get_user_guess(all_guesses)
-  # Initialize variable to preserve variable scope
-  user_guess = nil
-  # Check for letter
+  puts 'Enter one letter: '
+
   loop do
     user_guess = gets.chomp.upcase.to_s
-    break if user_guess =~ /[A-Z]/
-    puts 'Invalid. Please enter a new letter: '
+    next unless parse_guess(user_guess, all_guesses)
+
+    return user_guess
   end
-  # Make sure it has not been guessed yet
-  # Also if more than one letter is entered, only take the first
-  while all_guesses.include?(user_guess[0])
+end
+
+def parse_guess(guess, all_guesses)
+  unless valid_guess? guess
+    puts 'Invalid. Please enter a new letter:'
+    return false
+  end
+
+  if all_guesses.include? guess
     puts "That's been guessed already. Please enter a new letter.\n\n"
-    user_guess = gets.chomp.upcase
+    return false
   end
-  user_guess
+
+  true
+end
+
+def valid_guess?(guess)
+  guess =~ /[A-Z]/ && guess.length == 1
 end
 
 main
