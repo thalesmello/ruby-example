@@ -7,13 +7,6 @@ def main
   print flower * chances
   print bouquet
 
-  words = %w( CAT
-              DOG
-              CHINCHILLA
-              FERRET
-              HAMSTER
-              IGUANA
-              SNAKE )
   # Shuffle words in array and pick first element
   word = words.sample.split('')
   # Use the length of that word to create the right number of underscore spots
@@ -86,6 +79,16 @@ def bouquet
        |   |
        |___|
   '
+end
+
+def words
+  %w( CAT
+      DOG
+      CHINCHILLA
+      FERRET
+      HAMSTER
+      IGUANA
+      SNAKE )
 end
 
 def get_user_guess(all_guesses)
