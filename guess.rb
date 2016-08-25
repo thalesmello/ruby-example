@@ -11,10 +11,7 @@ def main
 
   # Run the program
   all_guesses = []
-  loop do
-    # Will run until no more chances, then program exits
-    exit if chances == 0
-
+  while chances > 0
     # Start with underscore 'word', will update with actual letters guessed
     # as it loops
     puts "Here is your word: #{under_word}"
