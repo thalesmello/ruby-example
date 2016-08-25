@@ -34,9 +34,8 @@ word = words.sample.split('')
 under_word = ['_'] * word.length
 
 # Run the program
-runtime = word.length + chances
 all_guesses = []
-runtime.times do
+loop do
   # Will run until no more chances, then program exits
   exit if chances == 0
 
