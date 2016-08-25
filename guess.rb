@@ -30,8 +30,8 @@ words = [ ["C", "A", "T"],
           ["I", "G", "U", "A", "N", "A"],
           ["S", "N", "A", "K", "E"]
         ]
-#shuffle words in array and pick first element
-word = words.shuffle[0]
+# Shuffle words in array and pick first element
+word = words.sample
 #use the length of that word to create the right number of underscore spots
 under_word = ["_"] * word.length
 
