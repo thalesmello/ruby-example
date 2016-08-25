@@ -20,12 +20,7 @@ def main
 
     user_guess = get_user_guess(all_guesses)
 
-    # Output the letter picked
-    puts "You chose: #{user_guess}"
-    # Put that letter into array of all letters guessed
-    all_guesses << user_guess
-    # Output all letters picked so far
-    puts "\n\nHere are your letters so far : #{all_guesses}\n\n"
+    register_user_guess(user_guess, all_guesses)
 
     # When a correct letter is picked
     if word.include?(user_guess)
@@ -92,6 +87,15 @@ def get_user_guess(all_guesses)
 
     return user_guess
   end
+end
+
+def register_user_guess(user_guess, all_guesses)
+  # Output the letter picked
+  puts "You chose: #{user_guess}"
+  # Put that letter into array of all letters guessed
+  all_guesses << user_guess
+  # Output all letters picked so far
+  puts "\n\nHere are your letters so far : #{all_guesses}\n\n"
 end
 
 def parse_guess(guess, all_guesses)
