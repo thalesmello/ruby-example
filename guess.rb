@@ -4,13 +4,6 @@ def main
   chances = 5
   flower = '(@)'
 
-  bouquet = '
-   \, \, |, /, /
-       _\|/_
-      |_____|
-       |   |
-       |___|
-  '
   print flower * chances
   print bouquet
 
@@ -83,6 +76,16 @@ def print_welcome_message
         If incorrect, you will lose a petal
         If all your petals are gone, you lose
         If you guess all correct letters in Word you win!!!"
+end
+
+def bouquet
+  '
+   \, \, |, /, /
+       _\|/_
+      |_____|
+       |   |
+       |___|
+  '
 end
 
 def get_user_guess(all_guesses)
