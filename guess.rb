@@ -44,20 +44,7 @@ def main
     puts "Here is your word: #{under_word}"
     puts 'Enter one letter: '
 
-    # Initialize variable to preserve variable scope
-    user_guess = nil
-    # Check for letter
-    loop do
-      user_guess = gets.chomp.upcase.to_s
-      break if /[A-Z]/ =~ user_guess
-      puts 'Invalid. Please enter a new letter: '
-    end
-    # Make sure it has not been guessed yet
-    # Also if more than one letter is entered, only take the first
-    while all_guesses.include?(user_guess[0])
-      puts "That's been guessed already. Please enter a new letter.\n\n"
-      user_guess = gets.chomp.upcase
-    end
+    user_guess = get_user_guess(all_guesses)
 
     # Output the letter picked
     puts "You chose: #{user_guess[0]}"
@@ -93,6 +80,24 @@ def main
       end
     end
   end
+end
+
+def get_user_guess(all_guesses)
+  # Initialize variable to preserve variable scope
+  user_guess = nil
+  # Check for letter
+  loop do
+    user_guess = gets.chomp.upcase.to_s
+    break if /[A-Z]/ =~ user_guess
+    puts 'Invalid. Please enter a new letter: '
+  end
+  # Make sure it has not been guessed yet
+  # Also if more than one letter is entered, only take the first
+  while all_guesses.include?(user_guess[0])
+    puts "That's been guessed already. Please enter a new letter.\n\n"
+    user_guess = gets.chomp.upcase
+  end
+  user_guess
 end
 
 main
