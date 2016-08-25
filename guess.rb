@@ -48,13 +48,11 @@ runtime.times do
   puts "Here is your word: #{under_word}"
   puts "Enter one letter: "
 
-  #prep user input to go through conditionals
-  user_guess = gets.chomp.upcase.to_s
-
   #check for letter
-  until /[A-Z]/.match(user_guess)
+  while true
+    user_guess = gets.chomp.upcase.to_s
+    break if /[A-Z]/.match(user_guess)
     puts "Invalid. Please enter a new letter: "
-    user_guess = gets.chomp.upcase
   end
   #make sure it has not been guessed yet
   #also if more than one letter is entered, only take the first
