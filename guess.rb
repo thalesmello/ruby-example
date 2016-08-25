@@ -22,16 +22,15 @@ print flower * chances
 print bouquet
 
 
-words = [ ["C", "A", "T"],
-          ["D", "O", "G"],
-          ["C", "H", "I", "N", "C", "H", "I", "L", "L", "A"],
-          ["F", "E", "R", "R", "E", "T"],
-          ["H", "A", "M", "S", "T", "E", "R"],
-          ["I", "G", "U", "A", "N", "A"],
-          ["S", "N", "A", "K", "E"]
-        ]
+words = [ "CAT",
+          "DOG",
+          "CHINCHILLA",
+          "FERRET",
+          "HAMSTER",
+          "IGUANA",
+          "SNAKE" ]
 # Shuffle words in array and pick first element
-word = words.sample
+word = words.sample.split("")
 #use the length of that word to create the right number of underscore spots
 under_word = ["_"] * word.length
 
