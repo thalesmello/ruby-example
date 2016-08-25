@@ -22,9 +22,9 @@ def main
     user_guess = get_user_guess(all_guesses)
 
     # Output the letter picked
-    puts "You chose: #{user_guess[0]}"
+    puts "You chose: #{user_guess}"
     # Put that letter into array of all letters guessed
-    all_guesses << user_guess[0]
+    all_guesses << user_guess
     # Output all letters picked so far
     puts "\n\nHere are your letters so far : #{all_guesses}\n\n"
 
@@ -32,9 +32,7 @@ def main
     if word.include?(user_guess)
       puts 'YOU GUESSED A CORRECT LETTER!'
       # Replace the underscore with its correct letter value
-      word.each_with_index do |letter, i|
-        under_word[i] = letter if letter == user_guess
-      end
+      fill_under_word(under_word, word, user_guess)
 
       # When all letters are guess, player wins!
       if word.all? { |e| all_guesses.include?(e) }
@@ -120,6 +118,12 @@ end
 
 def valid_guess?(guess)
   guess =~ /[A-Z]/ && guess.length == 1
+end
+
+def fill_under_word(under_word, word, user_guess)
+  word.each_with_index do |letter, i|
+    under_word[i] = letter if letter == user_guess
+  end
 end
 
 main
