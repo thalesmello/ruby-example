@@ -45,10 +45,11 @@ runtime.times do
   puts "Here is your word: #{under_word}"
   puts 'Enter one letter: '
 
+  user_guess = nil
   # Check for letter
-  while true
+  loop do
     user_guess = gets.chomp.upcase.to_s
-    break if /[A-Z]/.match(user_guess)
+    break if /[A-Z]/ =~ user_guess
     puts 'Invalid. Please enter a new letter: '
   end
   # Make sure it has not been guessed yet
