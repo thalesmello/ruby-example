@@ -1,12 +1,5 @@
 def main
-  puts "Welcome to Word Guess Game!
-        The theme is: pets!"
-  puts "The rules are as follows:
-        Enter one letter at a time
-        If correct, the letter will be filled in
-        If incorrect, you will lose a petal
-        If all your petals are gone, you lose
-        If you guess all correct letters in Word you win!!!"
+  print_welcome_message
 
   chances = 5
   flower = '(@)'
@@ -79,6 +72,17 @@ def main
       end
     end
   end
+end
+
+def print_welcome_message
+  puts "Welcome to Word Guess Game!
+        The theme is: pets!"
+  puts "The rules are as follows:
+        Enter one letter at a time
+        If correct, the letter will be filled in
+        If incorrect, you will lose a petal
+        If all your petals are gone, you lose
+        If you guess all correct letters in Word you win!!!"
 end
 
 def get_user_guess(all_guesses)
