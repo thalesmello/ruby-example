@@ -38,9 +38,7 @@ runtime = word.length + chances
 all_guesses = []
 runtime.times do
   # Will run until no more chances, then program exits
-  if chances == 0
-    exit
-  end
+  exit if chances == 0
 
   # Start with underscore 'word', will update with actual letters guessed as it loops
   puts "Here is your word: #{under_word}"
