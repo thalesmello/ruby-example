@@ -9,7 +9,7 @@ puts "The rules are as follows:
       If you guess all correct letters in Word you win!!!"
 
 chances = 5
-flower = "(@)"
+flower = '(@)'
 
 bouquet = '
  \, \, |, /, /
@@ -29,9 +29,9 @@ words = %w( CAT
             IGUANA
             SNAKE )
 # Shuffle words in array and pick first element
-word = words.sample.split("")
+word = words.sample.split('')
 #use the length of that word to create the right number of underscore spots
-under_word = ["_"] * word.length
+under_word = ['_'] * word.length
 
 #run the program
 runtime = word.length + chances
@@ -44,13 +44,13 @@ runtime.times do
 
   #start with underscore 'word', will update with actual letters guessed as it loops
   puts "Here is your word: #{under_word}"
-  puts "Enter one letter: "
+  puts 'Enter one letter: '
 
   #check for letter
   while true
     user_guess = gets.chomp.upcase.to_s
     break if /[A-Z]/.match(user_guess)
-    puts "Invalid. Please enter a new letter: "
+    puts 'Invalid. Please enter a new letter: '
   end
   #make sure it has not been guessed yet
   #also if more than one letter is entered, only take the first
@@ -68,13 +68,13 @@ runtime.times do
 
   #when a correct letter is picked
   if word.include?(user_guess)
-    puts "YOU GUESSED A CORRECT LETTER!"
+    puts 'YOU GUESSED A CORRECT LETTER!'
     #replace the underscore with its correct letter value
     location = word.index(user_guess)
     under_word[location] = user_guess
     #when all letters are guess, player wins!
     if word.all? { |e| all_guesses.include?(e) }
-      puts "You win!"
+      puts 'You win!'
       puts "The word is: #{word}"
       exit
     end
