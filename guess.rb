@@ -2,10 +2,7 @@ def main
   print_welcome_message
 
   chances = 5
-  flower = '(@)'
-
-  print flower * chances
-  print bouquet
+  print_flowers(chances)
 
   # Shuffle words in array and pick first element
   word = words.sample.split('')
@@ -49,8 +46,7 @@ def main
       # If letter is incorrect, remove a petal
       chances -= 1
       puts "THAT IS INCORRECT. You lose a petal!\n\n"
-      print flower * chances
-      print bouquet
+      print_flowers(chances)
       # When there are no more chances left, player loses and program ends
       if chances == 0
         puts "\n\nYOU RAN OUT OF PETALS. YOU LOSE THE GAME\n\n\n"
@@ -89,6 +85,12 @@ def words
       HAMSTER
       IGUANA
       SNAKE )
+end
+
+def print_flowers(chances)
+  flower = '(@)'
+  print flower * chances
+  print bouquet
 end
 
 def get_user_guess(all_guesses)
