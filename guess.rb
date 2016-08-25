@@ -40,11 +40,9 @@ def main
       chances -= 1
       puts "THAT IS INCORRECT. You lose a petal!\n\n"
       print_flowers(chances)
+
       # When there are no more chances left, player loses and program ends
-      if chances == 0
-        puts "\n\nYOU RAN OUT OF PETALS. YOU LOSE THE GAME\n\n\n"
-        puts "The word was: #{word}"
-      end
+      print_game_over(word) if chances == 0
     end
   end
 end
@@ -132,6 +130,11 @@ end
 
 def win_game?(word, all_guesses)
   word.all? { |letter| all_guesses.include? letter }
+end
+
+def print_game_over(word)
+  puts "\n\nYOU RAN OUT OF PETALS. YOU LOSE THE GAME\n\n\n"
+  puts "The word was: #{word}"
 end
 
 main
