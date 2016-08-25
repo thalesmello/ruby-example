@@ -56,7 +56,7 @@ runtime.times do
   end
   #make sure it has not been guessed yet
   #also if more than one letter is entered, only take the first
-  until all_guesses.include?(user_guess[0]) == FALSE
+  while all_guesses.include?(user_guess[0])
     puts "That's been guessed already. Please enter a new letter.\n\n"
     user_guess = gets.chomp.upcase
   end
