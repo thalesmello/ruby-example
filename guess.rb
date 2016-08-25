@@ -45,6 +45,7 @@ runtime.times do
   puts "Here is your word: #{under_word}"
   puts 'Enter one letter: '
 
+  # Initialize variable to preserve variable scope
   user_guess = nil
   # Check for letter
   loop do
