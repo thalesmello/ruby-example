@@ -38,8 +38,7 @@ def main
     else
       # If letter is incorrect, remove a petal
       chances -= 1
-      puts "THAT IS INCORRECT. You lose a petal!\n\n"
-      print_flowers(chances)
+      print_point_lost(chances)
 
       # When there are no more chances left, player loses and program ends
       print_game_over(word) if chances == 0
@@ -130,6 +129,11 @@ end
 
 def win_game?(word, all_guesses)
   word.all? { |letter| all_guesses.include? letter }
+end
+
+def print_point_lost(chances)
+  puts "THAT IS INCORRECT. You lose a petal!\n\n"
+  print_flowers(chances)
 end
 
 def print_game_over(word)
