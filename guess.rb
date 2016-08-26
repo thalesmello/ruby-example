@@ -13,8 +13,8 @@ def main
     register_user_guess(user_guess, all_guesses)
 
     if word.include?(user_guess)
-      game_finished = when_correct_guess(word, under_word, user_guess,
-                                         all_guesses)
+      when_correct_guess(word, under_word, user_guess)
+      game_finished = check_game_finished(word, all_guesses)
     else
       chances -= 1
       when_wrong_guess(chances, word)
@@ -46,12 +46,10 @@ def initial_state
   [chances, word, under_word, all_guesses, game_finished]
 end
 
-def when_correct_guess(word, under_word, user_guess, all_guesses)
+def when_correct_guess(word, under_word, user_guess)
   puts 'YOU GUESSED A CORRECT LETTER!'
 
   fill_under_word(under_word, word, user_guess)
-
-  check_game_finished(word, all_guesses)
 end
 
 def when_wrong_guess(chances, word)
