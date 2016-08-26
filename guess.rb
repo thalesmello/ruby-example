@@ -2,39 +2,29 @@
 class Guess
   def initialize
     @printer = Printer.new
+    @chances = 5
+    @word = words.sample.split('')
+    @under_word = ['_'] * @word.length
+    @all_guesses = []
   end
 
   def run
     @printer.welcome
-    chances, word, under_word, all_guesses, game_finished = initial_state
-    @printer.chance_flowers(chances)
+    @printer.chance_flowers(@chances)
 
-    while chances > 0 && !game_finished
-      puts "Here is your word: #{under_word}"
-      user_guess = get_user_guess(all_guesses)
-      register_user_guess(user_guess, all_guesses)
+    while @chances > 0 && !@game_finished
+      puts "Here is your word: #{@under_word}"
+      user_guess = get_user_guess(@all_guesses)
+      register_user_guess(user_guess, @all_guesses)
 
-      if word.include?(user_guess)
-        when_correct_guess(word, under_word, user_guess)
-        game_finished = check_game_finished(word, all_guesses)
+      if @word.include?(user_guess)
+        when_correct_guess(@word, @under_word, user_guess)
+        @game_finished = check_game_finished(@word, @all_guesses)
       else
-        chances -= 1
-        when_wrong_guess(chances, word)
+        @chances -= 1
+        when_wrong_guess(@chances, @word)
       end
     end
-  end
-
-  def initial_state
-    chances = 5
-
-    word = words.sample.split('')
-    under_word = ['_'] * word.length
-
-    all_guesses = []
-
-    game_finished = false
-
-    [chances, word, under_word, all_guesses, game_finished]
   end
 
   def when_correct_guess(word, under_word, user_guess)
@@ -45,7 +35,6 @@ class Guess
 
   def when_wrong_guess(chances, word)
     @printer.point_lost(chances)
-
     @printer.game_over(word) if chances == 0
   end
 
