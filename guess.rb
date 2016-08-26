@@ -21,10 +21,7 @@ def main
     else
       # If letter is incorrect, remove a petal
       chances -= 1
-      print_point_lost(chances)
-
-      # When there are no more chances left, player loses and program ends
-      print_game_over(word) if chances == 0
+      when_wrong_guess(chances, word)
     end
   end
 end
@@ -63,6 +60,13 @@ def when_correct_guess(word, under_word, user_guess, all_guesses)
 
   # When all letters are guess, player wins!
   check_game_finished(word, all_guesses)
+end
+
+def when_wrong_guess(chances, word)
+  print_point_lost(chances)
+
+  # When there are no more chances left, player loses and program ends
+  print_game_over(word) if chances == 0
 end
 
 def bouquet
