@@ -137,6 +137,8 @@ class Printer
     puts "The word was: #{word}"
   end
 
+  private
+
   def bouquet
     '
      \, \, |, /, /
