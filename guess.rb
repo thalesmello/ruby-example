@@ -29,7 +29,7 @@ class GuessGame
     puts 'YOU GUESSED A CORRECT LETTER!'
 
     @under_word.fill(user_guess)
-    @game_status.check_win(@user_guesses.all)
+    @game_status.check_win(@user_guesses)
   end
 
   def when_wrong_guess
@@ -124,6 +124,10 @@ class UserGuesses
     end
   end
 
+  def correctly_guess?(word)
+    word.all? { |letter| @all_guesses.include? letter }
+  end
+
   def all
     @all_guesses
   end
@@ -205,8 +209,8 @@ class GameStatus
     @finished
   end
 
-  def check_win(all_guesses)
-    return unless win_game?(all_guesses)
+  def check_win(user_guesses)
+    return unless win_game?(user_guesses)
 
     puts 'You win!'
     puts "The word is: #{@word}"
@@ -216,8 +220,8 @@ class GameStatus
 
   private
 
-  def win_game?(all_guesses)
-    @word.all? { |letter| all_guesses.include? letter }
+  def win_game?(user_guesses)
+    user_guesses.correctly_guess? @word
   end
 end
 
