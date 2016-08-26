@@ -13,7 +13,7 @@ class Guess
     @printer.chance_flowers(@chances)
 
     while @chances > 0 && !@game_finished
-      puts "Here is your word: #{@under_word}"
+      @printer.under_word(@under_word)
       user_guess = get_user_guess(@all_guesses)
       register_user_guess(user_guess, @all_guesses)
 
@@ -115,6 +115,10 @@ class Printer
           If incorrect, you will lose a petal
           If all your petals are gone, you lose
           If you guess all correct letters in Word you win!!!"
+  end
+
+  def under_word(word)
+    puts "Here is your word: #{word}"
   end
 
   def chance_flowers(chances)
