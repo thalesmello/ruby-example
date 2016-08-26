@@ -1,8 +1,13 @@
+# Controls the logic of the game
 class Guess
+  def initialize
+    @printer = Printer.new
+  end
+
   def run
-    print_welcome_message
+    @printer.welcome
     chances, word, under_word, all_guesses, game_finished = initial_state
-    print_flowers(chances)
+    @printer.chance_flowers(chances)
 
     while chances > 0 && !game_finished
       puts "Here is your word: #{under_word}"
@@ -17,17 +22,6 @@ class Guess
         when_wrong_guess(chances, word)
       end
     end
-  end
-
-  def print_welcome_message
-    puts "Welcome to Word Guess Game!
-          The theme is: pets!"
-    puts "The rules are as follows:
-          Enter one letter at a time
-          If correct, the letter will be filled in
-          If incorrect, you will lose a petal
-          If all your petals are gone, you lose
-          If you guess all correct letters in Word you win!!!"
   end
 
   def initial_state
@@ -50,19 +44,9 @@ class Guess
   end
 
   def when_wrong_guess(chances, word)
-    print_point_lost(chances)
+    @printer.point_lost(chances)
 
-    print_game_over(word) if chances == 0
-  end
-
-  def bouquet
-    '
-     \, \, |, /, /
-         _\|/_
-        |_____|
-         |   |
-         |___|
-    '
+    @printer.game_over(word) if chances == 0
   end
 
   def words
@@ -73,12 +57,6 @@ class Guess
         HAMSTER
         IGUANA
         SNAKE )
-  end
-
-  def print_flowers(chances)
-    flower = '(@)'
-    print flower * chances
-    print bouquet
   end
 
   def get_user_guess(all_guesses)
@@ -134,15 +112,46 @@ class Guess
   def win_game?(word, all_guesses)
     word.all? { |letter| all_guesses.include? letter }
   end
+end
 
-  def print_point_lost(chances)
-    puts "THAT IS INCORRECT. You lose a petal!\n\n"
-    print_flowers(chances)
+# Prints messages of the game
+class Printer
+  def welcome
+    puts "Welcome to Word Guess Game!
+          The theme is: pets!"
+
+    puts "The rules are as follows:
+          Enter one letter at a time
+          If correct, the letter will be filled in
+          If incorrect, you will lose a petal
+          If all your petals are gone, you lose
+          If you guess all correct letters in Word you win!!!"
   end
 
-  def print_game_over(word)
+  def chance_flowers(chances)
+    flower = '(@)'
+    print flower * chances
+    print bouquet
+  end
+
+  def point_lost(chances)
+    puts "THAT IS INCORRECT. You lose a petal!\n\n"
+    chance_flowers(chances)
+  end
+
+  def game_over(word)
     puts "\n\nYOU RAN OUT OF PETALS. YOU LOSE THE GAME\n\n\n"
     puts "The word was: #{word}"
+  end
+
+  def bouquet
+    '
+     \, \, |, /, /
+         _\|/_
+        |_____|
+         |   |
+         |___|
+    '
   end
 end
 
