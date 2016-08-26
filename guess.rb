@@ -1,15 +1,11 @@
 def main
   print_welcome_message
-
   chances, word, under_word, all_guesses, game_finished = initial_state
-
   print_flowers(chances)
 
   while chances > 0 && !game_finished
     puts "Here is your word: #{under_word}"
-
     user_guess = get_user_guess(all_guesses)
-
     register_user_guess(user_guess, all_guesses)
 
     if word.include?(user_guess)
