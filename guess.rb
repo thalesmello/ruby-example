@@ -1,18 +1,10 @@
 def main
   print_welcome_message
 
-  chances = 5
+  chances, word, under_word, all_guesses, game_finished = initial_state
+
   print_flowers(chances)
 
-  # Shuffle words in array and pick first element
-  word = words.sample.split('')
-  # Use the length of that word to create the right number of underscore spots
-  under_word = ['_'] * word.length
-
-  # Run the program
-  all_guesses = []
-
-  game_finished = false
   while chances > 0 && !game_finished
     # Start with underscore 'word', will update with actual letters guessed
     # as it loops
@@ -50,6 +42,21 @@ def print_welcome_message
         If incorrect, you will lose a petal
         If all your petals are gone, you lose
         If you guess all correct letters in Word you win!!!"
+end
+
+def initial_state
+  chances = 5
+
+  # Shuffle words in array and pick first element
+  word = words.sample.split('')
+  # Use the length of that word to create the right number of underscore spots
+  under_word = ['_'] * word.length
+
+  all_guesses = []
+
+  game_finished = false
+
+  [chances, word, under_word, all_guesses, game_finished]
 end
 
 def bouquet
