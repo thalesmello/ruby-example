@@ -1,5 +1,5 @@
 # Controls the logic of the game
-class Guess
+class GuessGame
   def initialize
     @printer = Printer.new
     @chances = 5
@@ -148,4 +148,4 @@ class Printer
   end
 end
 
-Guess.new.run
+GuessGame.new.run
