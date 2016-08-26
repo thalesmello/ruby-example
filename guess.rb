@@ -18,24 +18,24 @@ class GuessGame
       user_guess = @user_guesses.prompt
 
       if @word.include?(user_guess)
-        when_correct_guess(@under_word, user_guess)
-        @game_status.check_win(@user_guesses.all)
+        when_correct_guess(user_guess)
       else
-        @chances.decrease
-        when_wrong_guess(@chances, @word)
+        when_wrong_guess
       end
     end
   end
 
-  def when_correct_guess(under_word, user_guess)
+  def when_correct_guess(user_guess)
     puts 'YOU GUESSED A CORRECT LETTER!'
 
-    under_word.fill(user_guess)
+    @under_word.fill(user_guess)
+    @game_status.check_win(@user_guesses.all)
   end
 
-  def when_wrong_guess(chances, word)
-    @printer.point_lost(chances.get)
-    @printer.game_over(word) if chances == 0
+  def when_wrong_guess
+    @chances.decrease
+    @printer.point_lost(@chances.get)
+    @printer.game_over(@word) if @chances.zero?
   end
 end
 
@@ -179,6 +179,10 @@ class Chances
 
   def get
     @chances
+  end
+
+  def zero?
+    @chances == 0
   end
 
   def positive?
