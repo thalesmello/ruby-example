@@ -4,7 +4,7 @@ class GuessGame
     @printer = Printer.new
     @chances = 5
     @word = RandomWord.new.pick
-    @under_word = ['_'] * @word.length
+    @under_word = UnderWord.new(@word)
     @user_guesses = UserGuesses.new
   end
 
@@ -13,11 +13,11 @@ class GuessGame
     @printer.chance_flowers(@chances)
 
     while @chances > 0 && !@game_finished
-      @printer.under_word(@under_word)
+      @printer.under_word(@under_word.get)
       user_guess = @user_guesses.prompt
 
       if @word.include?(user_guess)
-        when_correct_guess(@word, @under_word, user_guess)
+        when_correct_guess(@under_word, user_guess)
         @game_finished = check_game_finished(@word, @user_guesses.all)
       else
         @chances -= 1
@@ -26,21 +26,15 @@ class GuessGame
     end
   end
 
-  def when_correct_guess(word, under_word, user_guess)
+  def when_correct_guess(under_word, user_guess)
     puts 'YOU GUESSED A CORRECT LETTER!'
 
-    fill_under_word(under_word, word, user_guess)
+    under_word.fill(user_guess)
   end
 
   def when_wrong_guess(chances, word)
     @printer.point_lost(chances)
     @printer.game_over(word) if chances == 0
-  end
-
-  def fill_under_word(under_word, word, user_guess)
-    word.each_with_index do |letter, i|
-      under_word[i] = letter if letter == user_guess
-    end
   end
 
   def check_game_finished(word, all_guesses)
@@ -168,6 +162,24 @@ class UserGuesses
 
   def valid?(guess)
     guess =~ /[A-Z]/ && guess.length == 1
+  end
+end
+
+# Handles the filling of letters under the chosen word
+class UnderWord
+  def initialize(word)
+    @word = word
+    @under_word = ['_'] * @word.length
+  end
+
+  def get
+    @under_word
+  end
+
+  def fill(user_guess)
+    @word.each_with_index do |letter, i|
+      @under_word[i] = letter if letter == user_guess
+    end
   end
 end
 
