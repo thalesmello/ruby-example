@@ -3,7 +3,7 @@ class GuessGame
   def initialize
     @printer = Printer.new
     @chances = 5
-    @word = words.sample.split('')
+    @word = RandomWord.new.pick
     @under_word = ['_'] * @word.length
     @all_guesses = []
   end
@@ -147,6 +147,25 @@ class Printer
          |   |
          |___|
     '
+  end
+end
+
+# Stores words and yields them randomly
+class RandomWord
+  def pick
+    words.sample.split('')
+  end
+
+  private
+
+  def words
+    %w( CAT
+        DOG
+        CHINCHILLA
+        FERRET
+        HAMSTER
+        IGUANA
+        SNAKE )
   end
 end
 
