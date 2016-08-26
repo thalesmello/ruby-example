@@ -37,16 +37,6 @@ class GuessGame
     @printer.game_over(word) if chances == 0
   end
 
-  def words
-    %w( CAT
-        DOG
-        CHINCHILLA
-        FERRET
-        HAMSTER
-        IGUANA
-        SNAKE )
-  end
-
   def fill_under_word(under_word, word, user_guess)
     word.each_with_index do |letter, i|
       under_word[i] = letter if letter == user_guess
