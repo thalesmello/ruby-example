@@ -6,19 +6,20 @@ class GuessGame
     @word = RandomWord.new.pick
     @under_word = UnderWord.new(@word)
     @user_guesses = UserGuesses.new
+    @game_status = GameStatus.new(@word)
   end
 
   def run
     @printer.welcome
     @printer.chance_flowers(@chances.get)
 
-    while @chances.positive? && !@game_finished
+    while @chances.positive? && !@game_status.finished?
       @printer.under_word(@under_word.get)
       user_guess = @user_guesses.prompt
 
       if @word.include?(user_guess)
         when_correct_guess(@under_word, user_guess)
-        @game_finished = check_game_finished(@word, @user_guesses.all)
+        @game_status.check_win(@user_guesses.all)
       else
         @chances.decrease
         when_wrong_guess(@chances, @word)
@@ -35,19 +36,6 @@ class GuessGame
   def when_wrong_guess(chances, word)
     @printer.point_lost(chances.get)
     @printer.game_over(word) if chances == 0
-  end
-
-  def check_game_finished(word, all_guesses)
-    return false unless win_game?(word, all_guesses)
-
-    puts 'You win!'
-    puts "The word is: #{word}"
-
-    true
-  end
-
-  def win_game?(word, all_guesses)
-    word.all? { |letter| all_guesses.include? letter }
   end
 end
 
@@ -199,6 +187,33 @@ class Chances
 
   def decrease
     @chances -= 1
+  end
+end
+
+# Checks if game if finished base on the completion of the word
+class GameStatus
+  def initialize(word)
+    @finished = false
+    @word = word
+  end
+
+  def finished?
+    @finished
+  end
+
+  def check_win(all_guesses)
+    return unless win_game?(all_guesses)
+
+    puts 'You win!'
+    puts "The word is: #{@word}"
+
+    @finished = true
+  end
+
+  private
+
+  def win_game?(all_guesses)
+    @word.all? { |letter| all_guesses.include? letter }
   end
 end
 
