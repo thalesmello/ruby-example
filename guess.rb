@@ -2,7 +2,7 @@
 class GuessGame
   def initialize
     @printer = Printer.new
-    @chances = 5
+    @chances = Chances.new(5)
     @word = RandomWord.new.pick
     @under_word = UnderWord.new(@word)
     @user_guesses = UserGuesses.new
@@ -10,9 +10,9 @@ class GuessGame
 
   def run
     @printer.welcome
-    @printer.chance_flowers(@chances)
+    @printer.chance_flowers(@chances.get)
 
-    while @chances > 0 && !@game_finished
+    while @chances.positive? && !@game_finished
       @printer.under_word(@under_word.get)
       user_guess = @user_guesses.prompt
 
@@ -20,7 +20,7 @@ class GuessGame
         when_correct_guess(@under_word, user_guess)
         @game_finished = check_game_finished(@word, @user_guesses.all)
       else
-        @chances -= 1
+        @chances.decrease
         when_wrong_guess(@chances, @word)
       end
     end
@@ -33,7 +33,7 @@ class GuessGame
   end
 
   def when_wrong_guess(chances, word)
-    @printer.point_lost(chances)
+    @printer.point_lost(chances.get)
     @printer.game_over(word) if chances == 0
   end
 
@@ -180,6 +180,25 @@ class UnderWord
     @word.each_with_index do |letter, i|
       @under_word[i] = letter if letter == user_guess
     end
+  end
+end
+
+# Handle user chances in the game
+class Chances
+  def initialize(chances)
+    @chances = chances
+  end
+
+  def get
+    @chances
+  end
+
+  def positive?
+    @chances > 0
+  end
+
+  def decrease
+    @chances -= 1
   end
 end
 
