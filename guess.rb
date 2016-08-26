@@ -6,20 +6,16 @@ def main
   print_flowers(chances)
 
   while chances > 0 && !game_finished
-    # Start with underscore 'word', will update with actual letters guessed
-    # as it loops
     puts "Here is your word: #{under_word}"
 
     user_guess = get_user_guess(all_guesses)
 
     register_user_guess(user_guess, all_guesses)
 
-    # When a correct letter is picked
     if word.include?(user_guess)
       game_finished = when_correct_guess(word, under_word, user_guess,
                                          all_guesses)
     else
-      # If letter is incorrect, remove a petal
       chances -= 1
       when_wrong_guess(chances, word)
     end
@@ -40,9 +36,7 @@ end
 def initial_state
   chances = 5
 
-  # Shuffle words in array and pick first element
   word = words.sample.split('')
-  # Use the length of that word to create the right number of underscore spots
   under_word = ['_'] * word.length
 
   all_guesses = []
@@ -55,17 +49,14 @@ end
 def when_correct_guess(word, under_word, user_guess, all_guesses)
   puts 'YOU GUESSED A CORRECT LETTER!'
 
-  # Replace the underscore with its correct letter value
   fill_under_word(under_word, word, user_guess)
 
-  # When all letters are guess, player wins!
   check_game_finished(word, all_guesses)
 end
 
 def when_wrong_guess(chances, word)
   print_point_lost(chances)
 
-  # When there are no more chances left, player loses and program ends
   print_game_over(word) if chances == 0
 end
 
@@ -107,11 +98,8 @@ def get_user_guess(all_guesses)
 end
 
 def register_user_guess(user_guess, all_guesses)
-  # Output the letter picked
   puts "You chose: #{user_guess}"
-  # Put that letter into array of all letters guessed
   all_guesses << user_guess
-  # Output all letters picked so far
   puts "\n\nHere are your letters so far : #{all_guesses}\n\n"
 end
 
