@@ -16,12 +16,8 @@ def main
 
     # When a correct letter is picked
     if word.include?(user_guess)
-      puts 'YOU GUESSED A CORRECT LETTER!'
-      # Replace the underscore with its correct letter value
-      fill_under_word(under_word, word, user_guess)
-
-      # When all letters are guess, player wins!
-      game_finished = check_game_finished(word, all_guesses)
+      game_finished = when_correct_guess(word, under_word, user_guess,
+                                         all_guesses)
     else
       # If letter is incorrect, remove a petal
       chances -= 1
@@ -57,6 +53,16 @@ def initial_state
   game_finished = false
 
   [chances, word, under_word, all_guesses, game_finished]
+end
+
+def when_correct_guess(word, under_word, user_guess, all_guesses)
+  puts 'YOU GUESSED A CORRECT LETTER!'
+
+  # Replace the underscore with its correct letter value
+  fill_under_word(under_word, word, user_guess)
+
+  # When all letters are guess, player wins!
+  check_game_finished(word, all_guesses)
 end
 
 def bouquet
