@@ -5,7 +5,7 @@ class GuessGame
     @chances = 5
     @word = RandomWord.new.pick
     @under_word = ['_'] * @word.length
-    @all_guesses = []
+    @user_guesses = UserGuesses.new
   end
 
   def run
@@ -14,12 +14,11 @@ class GuessGame
 
     while @chances > 0 && !@game_finished
       @printer.under_word(@under_word)
-      user_guess = get_user_guess(@all_guesses)
-      register_user_guess(user_guess, @all_guesses)
+      user_guess = @user_guesses.prompt
 
       if @word.include?(user_guess)
         when_correct_guess(@word, @under_word, user_guess)
-        @game_finished = check_game_finished(@word, @all_guesses)
+        @game_finished = check_game_finished(@word, @user_guesses.all)
       else
         @chances -= 1
         when_wrong_guess(@chances, @word)
@@ -46,41 +45,6 @@ class GuessGame
         HAMSTER
         IGUANA
         SNAKE )
-  end
-
-  def get_user_guess(all_guesses)
-    puts 'Enter one letter: '
-
-    loop do
-      user_guess = gets.chomp.upcase.to_s
-      next unless parse_guess(user_guess, all_guesses)
-
-      return user_guess
-    end
-  end
-
-  def register_user_guess(user_guess, all_guesses)
-    puts "You chose: #{user_guess}"
-    all_guesses << user_guess
-    puts "\n\nHere are your letters so far : #{all_guesses}\n\n"
-  end
-
-  def parse_guess(guess, all_guesses)
-    unless valid_guess? guess
-      puts 'Invalid. Please enter a new letter:'
-      return false
-    end
-
-    if all_guesses.include? guess
-      puts "That's been guessed already. Please enter a new letter.\n\n"
-      return false
-    end
-
-    true
-  end
-
-  def valid_guess?(guess)
-    guess =~ /[A-Z]/ && guess.length == 1
   end
 
   def fill_under_word(under_word, word, user_guess)
@@ -166,6 +130,54 @@ class RandomWord
         HAMSTER
         IGUANA
         SNAKE )
+  end
+end
+
+# Queries new user input and keeps track of it
+class UserGuesses
+  def initialize
+    @all_guesses = []
+  end
+
+  def prompt
+    puts 'Enter one letter: '
+
+    loop do
+      user_guess = gets.chomp.upcase.to_s
+      next unless parse(user_guess)
+
+      register(user_guess)
+
+      return user_guess
+    end
+  end
+
+  def all
+    @all_guesses
+  end
+
+  def register(guess)
+    puts "You chose: #{guess}"
+    @all_guesses << guess
+    puts "\n\nHere are your letters so far : #{@all_guesses}\n\n"
+  end
+
+  def parse(guess)
+    unless valid? guess
+      puts 'Invalid. Please enter a new letter:'
+      return false
+    end
+
+    if @all_guesses.include? guess
+      puts "That's been guessed already. Please enter a new letter.\n\n"
+      return false
+    end
+
+    true
+  end
+
+  def valid?(guess)
+    guess =~ /[A-Z]/ && guess.length == 1
   end
 end
 
