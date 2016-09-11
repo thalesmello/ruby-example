@@ -213,18 +213,12 @@ class GameStatus
   end
 
   def check_win(user_guesses)
-    return unless win_game?(user_guesses)
+    return unless user_guesses.correctly_guess? @word
 
     puts 'You win!'
     puts "The word is: #{@word}"
 
     @finished = true
-  end
-
-  private
-
-  def win_game?(user_guesses)
-    user_guesses.correctly_guess? @word
   end
 end
 
