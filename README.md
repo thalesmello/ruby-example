@@ -30,13 +30,13 @@ files. I stopped because I satisfied myself with the current level of
 organization in the code.
 
 Notice that, as a matter of fact, this is highly subjective. For example, one could
-be satisfied with how the code looks like at the end of step 3 (commit `75870d7`).
+be satisfied with how the code looks like at the end of step 3 (commit `409c977`).
 This is a script with just functions, much shorter than the final result of this
 refactoring.
 
 Despite the bigger size, an object oriented code is easier to reason about and refactor,
 as mutation and behaviour tend to be better separated by concern. It was easier, for example,
-to figure `correctly_guess?` would fit as a method of `UserGuesses` in commit `ec30d6a`.
+to figure `correctly_guess?` would fit as a method of `UserGuesses` in commit `d5a4abe`.
 
 As your project grow in size, to be able to create abstractions and easily
 refactor them is a game changer.
@@ -109,4 +109,5 @@ For your convenience, those will be listed below:
 * [`7e50658`](https://github.com/thalesmello/ruby-example/commit/7e50658): Include README
 * [`7717ceb`](https://github.com/thalesmello/ruby-example/commit/7717ceb): Include license file
 * [`e22df21`](https://github.com/thalesmello/ruby-example/commit/e22df21): Include links in the README to make browsing the changes easier
-
+* [`a868f3c`](https://github.com/thalesmello/ruby-example/commit/a868f3c): Make changes easier to read
+* [`aefa574`](https://github.com/thalesmello/ruby-example/commit/aefa574): Inlining method `win_game?`
